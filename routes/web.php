@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,7 @@ Route::get('/usuarios', function () {
     return view('usuarios');
 });
 
+
 Route::get('/movimientos', function () {
     return view('movimientos');
 });
@@ -48,3 +50,7 @@ Route::get('/movimientos', function () {
 Route::get('/reportes', function () {
     return view('reportes');
 });
+
+
+
+
