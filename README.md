@@ -40,6 +40,6 @@ php artisan db:seed
 
 🎨 Paso 7: Cargar estilos y assets
 
-npm artisan serve
+php artisan serve
 
 Ahora el sistema debería estar funcionando correctamente en tu red local ✅
