@@ -2,7 +2,7 @@
 
 📁 Paso 1: Descomprimir el proyecto
 
-Debes descomprimir el proyecto dentro de la carpeta htdocs de XAMPP.
+Debes clonar el proyecto dentro de la carpeta htdocs de XAMPP o lararacon dentro de www.
 
 📍 Ejemplo de ruta:
 
