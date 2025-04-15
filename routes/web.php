@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,12 @@ use App\Http\Controllers\UserController;
 
 
 
-use App\Http\Controllers\LoginController;
+
+
+// Ruta raíz que redirecciona automáticamente
+Route::get('/', function () {
+    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
+});
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
@@ -26,4 +32,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+Route::get('/productos', function () {
+    return view('productos');
+});
+
+Route::get('/usuarios', function () {
+    return view('usuarios');
+});
+
+Route::get('/movimientos', function () {
+    return view('movimientos');
+});
+
+Route::get('/reportes', function () {
+    return view('reportes');
 });
