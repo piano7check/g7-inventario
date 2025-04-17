@@ -16,32 +16,3 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-
-<<<<<<< HEAD
-
-Route::post('/usuarios/test', function (Request $request) {
-    $request->validate([
-        'nombre' => 'required',
-        'correo' => 'required|email|unique:usuarios,correo',
-        'contrasena' => 'required|min:6',
-        'rol' => 'required|in:administrador,registrador',
-        'documento_identidad' => 'required',
-    ]);
-
-    $usuario = Usuario::create([
-        'nombre' => $request->nombre,
-        'correo' => $request->correo,
-        'contrasena' => bcrypt($request->contrasena),
-        'rol' => $request->rol,
-        'documento_identidad' => $request->documento_identidad,
-    ]);
-
-    return response()->json([
-        'message' => 'Usuario creado correctamente',
-        'usuario' => $usuario
-    ]);
-    
-});
-=======
-
->>>>>>> 36dca72 (vista de usuario terminado y funcional)

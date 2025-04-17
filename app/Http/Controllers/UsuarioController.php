@@ -84,10 +84,6 @@ class UsuarioController extends Controller
     $pdf = Pdf::loadHTML($html);
 
     return $pdf->download('usuarios.pdf');
-<<<<<<< HEAD
-=======
-}
->>>>>>> 36dca72 (vista de usuario terminado y funcional)
 }
 }
 
