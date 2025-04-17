@@ -11,8 +11,9 @@ class UsuarioSeeder extends Seeder
     {
         Usuario::create([
             'nombre' => 'Admin Master',
+            'documento_identidad' => '99999999', // ✅ AGREGA ESTE CAMPO
             'correo' => 'admin@uab.com',
-            'contrasena' => bcrypt('admin123'),
+            'contrasena' => bcrypt('123456'),
             'rol' => 'administrador',
         ]);
     }

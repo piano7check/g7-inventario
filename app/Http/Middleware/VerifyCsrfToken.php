@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        '/login', // 👈 ahora Laravel no pedirá token para esta ruta
+        '/usuarios',
     ];
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Models\Usuario;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,10 +16,8 @@ use App\Models\Usuario;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::post('/login', [LoginController::class, 'login']);
+
+<<<<<<< HEAD
 
 Route::post('/usuarios/test', function (Request $request) {
     $request->validate([
@@ -41,4 +40,8 @@ Route::post('/usuarios/test', function (Request $request) {
         'message' => 'Usuario creado correctamente',
         'usuario' => $usuario
     ]);
+    
 });
+=======
+
+>>>>>>> 36dca72 (vista de usuario terminado y funcional)

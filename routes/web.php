@@ -37,11 +37,26 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/productos', function () {
     return view('productos');
 });
-
+//rutas de usuario
 Route::get('/usuarios', function () {
     return view('usuarios');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+});
+Route::post('/usuarios/{id}/actualizar', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+//ruta de exportacion de usuarios
+Route::get('/usuarios/export/excel', [UsuarioController::class, 'exportExcel'])->name('usuarios.export.excel');
+Route::get('/usuarios/export/pdf', [UsuarioController::class, 'exportPDF'])->name('usuarios.export.pdf');
 
+//instaladro de excel y pdf
+//composer require maatwebsite/excel
+//composer require barryvdh/laravel-dompdf
+
+
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy']);
 
 Route::get('/movimientos', function () {
     return view('movimientos');
@@ -50,6 +65,7 @@ Route::get('/movimientos', function () {
 Route::get('/reportes', function () {
     return view('reportes');
 });
+
 
 
 

@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - System Stock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{-- Bootstrap & Google Fonts --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+
     <style>
         * {
             font-family: 'Quicksand', sans-serif;
@@ -19,7 +23,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .login-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
@@ -80,20 +83,27 @@
 <body>
 <div class="login-card">
     <h3>System Stock</h3>
+
     <form method="POST" action="{{ route('login.submit') }}">
-        @csrf
+        @csrf {{-- Token CSRF para protección de formulario --}}
+
         <div class="mb-3">
             <label for="correo" class="form-label">Correo electrónico</label>
             <input type="email" name="correo" class="form-control" placeholder="ejemplo@uab.com" required>
+            @error('correo')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
+
         <div class="mb-4">
             <label for="contrasena" class="form-label">Contraseña</label>
             <input type="password" name="contrasena" class="form-control" placeholder="••••••••" required>
+            @error('contrasena')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
+
         <button type="submit" class="btn btn-login w-100 py-2">Ingresar</button>
-        @error('correo')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
     </form>
 </div>
 </body>
