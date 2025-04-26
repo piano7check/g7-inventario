@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,9 +35,13 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 });
+//rutas de productos
 Route::get('/productos', function () {
     return view('productos');
 });
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+// Guardar un nuevo producto
+Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
 //rutas de usuario
 Route::get('/usuarios', function () {
     return view('usuarios');
