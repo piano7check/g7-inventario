@@ -7,20 +7,15 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    // Mostrar todos los productos
     public function index()
-    {   
-        
+    {
         $productos = Producto::all();
-        
         return view('productos', compact('productos'));
     }
-    
-    // Guardar nuevo producto
+
     public function store(Request $request)
     {
         $request->validate([
-            
             'nombre' => 'required|string|max:100',
             'codigo' => 'required|string|max:50|unique:productos,codigo',
             'unidad_medida' => 'required|string|max:50',
@@ -29,16 +24,36 @@ class ProductoController extends Controller
             'observacion' => 'nullable|string',
         ]);
 
-        Producto::create([
-            
-            'nombre' => $request->nombre,
-            'codigo' => $request->codigo,
-            'unidad_medida' => $request->unidad_medida,
-            'categoria' => $request->categoria,
-            'cantidad' => $request->cantidad,
-            'observacion' => $request->observacion,
-        ]);
+        Producto::create($request->only([
+            'nombre', 'codigo', 'unidad_medida', 'categoria', 'cantidad', 'observacion'
+        ]));
 
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente');
+    }
+
+    public function edit($id)
+    {
+        $producto = Producto::where('Id_producto', $id)->firstOrFail();
+        return view('productos.editar', compact('producto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'codigo' => 'required|string|max:50',
+            'unidad_medida' => 'required|string|max:50',
+            'categoria' => 'required|string|max:100',
+            'cantidad' => 'required|integer|min:0',
+            'observacion' => 'nullable|string',
+        ]);
+
+        $producto = Producto::where('Id_producto', $id)->firstOrFail();
+
+        $producto->update($request->only([
+            'nombre', 'codigo', 'unidad_medida', 'categoria', 'cantidad', 'observacion'
+        ]));
+
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente');
     }
 }
