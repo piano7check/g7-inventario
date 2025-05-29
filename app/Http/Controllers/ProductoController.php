@@ -7,9 +7,19 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
+        $buscar = $request->input('buscar');
+
+        $productos = Producto::query();
+
+        if ($buscar) {
+            $productos->where('nombre', 'like', "%{$buscar}%")
+                      ->orWhere('codigo', 'like', "%{$buscar}%");
+        }
+
+        $productos = $productos->orderBy('id_producto', 'desc')->get();
+
         return view('productos', compact('productos'));
     }
 
@@ -33,7 +43,7 @@ class ProductoController extends Controller
 
     public function edit($id)
     {
-        $producto = Producto::where('Id_producto', $id)->firstOrFail();
+        $producto = Producto::where('id_producto', $id)->firstOrFail();
         return view('productos.editar', compact('producto'));
     }
 
@@ -48,12 +58,20 @@ class ProductoController extends Controller
             'observacion' => 'nullable|string',
         ]);
 
-        $producto = Producto::where('Id_producto', $id)->firstOrFail();
+        $producto = Producto::where('id_producto', $id)->firstOrFail();
 
         $producto->update($request->only([
             'nombre', 'codigo', 'unidad_medida', 'categoria', 'cantidad', 'observacion'
         ]));
 
         return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente');
     }
 }

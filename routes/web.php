@@ -85,5 +85,10 @@ Route::get('/productos/{id}/editar', [ProductoController::class, 'edit'])->name(
 // Actualizar el producto (ya la tenías)
 Route::put('/productos/{id}/actualizar', [ProductoController::class, 'update'])->name('productos.update');
 
+Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+
+Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
 
 
