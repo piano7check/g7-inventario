@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('categoria', 100);
             $table->string('unidad_medida', 50);
             $table->integer('cantidad')->default(0);
+            $table->string('imagen')->nullable();
             $table->text('observacion')->nullable();
+
             $table->timestamps();
         });
         
