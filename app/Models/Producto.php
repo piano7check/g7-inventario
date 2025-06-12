@@ -16,6 +16,7 @@ class Producto extends Model
         'categoria',
         'cantidad',
         'observacion',
+        'imagen',
     ];
 
     public $timestamps = true;
