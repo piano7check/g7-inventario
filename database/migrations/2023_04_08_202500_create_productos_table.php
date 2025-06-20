@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Cambiado el nombre del archivo para que se ejecute antes de la migración que añade stock_minimo
 return new class extends Migration
 {
     /**

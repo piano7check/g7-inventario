@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conteos_fisicos', function (Blueprint $table) {
-            $table->id('id_conteo');
+        Schema::create('movimientos_productos', function (Blueprint $table) {
+            $table->id('id_movimiento');
             $table->unsignedBigInteger('id_producto');
-            $table->integer('cantidad_contada');
-            $table->date('fecha_conteo');
+            $table->enum('tipo_movimiento', ['entrada', 'salida']);
+            $table->integer('cantidad');
+            $table->timestamp('fecha_movimiento')->useCurrent();
             $table->text('observacion')->nullable();
             $table->foreign('id_producto')->references('id_producto')->on('productos')->onDelete('cascade');
             $table->timestamps();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conteos_fisicos');
+        Schema::dropIfExists('movimientos_productos');
     }
 };
