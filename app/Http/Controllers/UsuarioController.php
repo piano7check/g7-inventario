@@ -6,7 +6,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsuariosExport;
-use PDF;
+use Dompdf\Dompdf;
 
 class UsuarioController extends Controller
 {
@@ -79,11 +79,13 @@ class UsuarioController extends Controller
 
     // Esto genera el HTML manualmente
     $html = view('exports.usuarios-pdf', compact('usuarios'))->render();
-
-    // Esto genera el PDF a partir del HTML
-    $pdf = Pdf::loadHTML($html);
-
-    return $pdf->download('usuarios.pdf');
+    
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    
+    return $dompdf->stream('usuarios.pdf');
 }
 }
 

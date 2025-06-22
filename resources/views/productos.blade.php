@@ -143,9 +143,13 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-4">
+        @if(auth()->user()->rol == 'administrador')
         <button type="button" class="btn-accion btn-crear" data-bs-toggle="modal" data-bs-target="#crearProductoModal">
             <i class="bi bi-plus-circle"></i> Nuevo Producto
         </button>
+        @else
+        <div></div> <!-- Espacio vacío para mantener el layout cuando el botón no se muestra -->
+        @endif
 
         <form method="GET" action="{{ route('productos.index') }}" class="d-flex gap-2">
             <input type="text" name="buscar" class="form-control" placeholder="Buscar por nombre o código" value="{{ request('buscar') }}">
@@ -169,12 +173,14 @@
                             <button class="btn-accion btn-ver" data-bs-toggle="modal" data-bs-target="#modalVer{{ $producto->id_producto }}">
                                 <i class="bi bi-eye"></i> Ver
                             </button>
+                            @if(auth()->user()->rol == 'administrador')
                             <button class="btn-accion btn-editar" data-bs-toggle="modal" data-bs-target="#modalEditar{{ $producto->id_producto }}">
                                 <i class="bi bi-pencil"></i> Editar
                             </button>
                             <button class="btn-accion btn-eliminar" data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $producto->id_producto }}">
                                 <i class="bi bi-trash"></i> Eliminar
                             </button>
+                            @endif
                         </div>
                     </div>
                 </div>

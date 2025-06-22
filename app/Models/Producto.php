@@ -17,6 +17,7 @@ class Producto extends Model
         'cantidad',
         'observacion',
         'imagen',
+        'stock_minimo',
     ];
 
     public $timestamps = true;

@@ -45,4 +45,24 @@ class LoginController extends Controller
         // Si es navegador, redirigir normal
         return redirect()->route('dashboard');
     }
+    
+    /**
+     * Cierra la sesión del usuario actual
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true]);
+        }
+        
+        return redirect()->route('login');
+    }
 }

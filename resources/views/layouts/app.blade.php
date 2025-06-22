@@ -112,11 +112,17 @@
     {{-- Menú lateral --}}
     <div class="sidebar">
         <h4><i class="bi bi-box-seam"></i> System Stock</h4>
-        <a href="{{ url('/dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        @if(auth()->user()->rol == 'administrador')
+            <a href="{{ url('/inventario/dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        @endif
         <a href="{{ url('/productos') }}"><i class="bi bi-box"></i> Productos</a>
-        <a href="{{ url('/usuarios') }}"><i class="bi bi-people-fill"></i> Usuarios</a>
-        <a href="{{ url('/movimientos') }}"><i class="bi bi-arrow-left-right"></i> Movimientos</a>
-        <a href="{{ url('/reportes') }}"><i class="bi bi-bar-chart-fill"></i> Reportes</a>
+        <a href="{{ url('/inventario') }}"><i class="bi bi-clipboard-data"></i> Inventario</a>
+        
+        @if(auth()->user()->rol == 'administrador')
+            <a href="{{ url('/inventario/conteo-fisico') }}"><i class="bi bi-list-check"></i> Conteo Físico</a>
+            <a href="{{ url('/usuarios') }}"><i class="bi bi-people-fill"></i> Usuarios</a>
+            <a href="{{ url('/reportes') }}"><i class="bi bi-bar-chart-fill"></i> Reportes</a>
+        @endif
     </div>
 
     {{-- Contenido principal --}}

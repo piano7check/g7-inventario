@@ -21,7 +21,21 @@ class ProductoController extends Controller
 
         $productos = $productos->orderBy('id_producto', 'desc')->get();
 
-        return view('productos', compact('productos'));
+        try {
+            // Verificar si la vista existe
+            if (view()->exists('productos')) {
+                return view('productos', compact('productos'));
+            } else {
+                \Log::error('La vista productos no existe');
+                return response()->view('layouts.app', ['error' => 'No se pudo cargar la página de productos. Por favor, contacte al administrador.'], 500);
+            }
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Error al cargar la vista de productos: ' . $e->getMessage());
+            
+            // Devolver una vista alternativa o un mensaje de error
+            return response()->view('layouts.app', ['error' => 'No se pudo cargar la página de productos. Por favor, contacte al administrador.'], 500);
+        }
     }
 
     public function store(Request $request)

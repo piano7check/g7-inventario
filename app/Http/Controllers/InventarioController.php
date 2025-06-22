@@ -172,47 +172,7 @@ class InventarioController extends Controller
             ->with('success', 'Configuración de alertas actualizada correctamente');
     }
     
-    public function qrScanner()
-    {
-        // Obtener todos los productos para el formulario de nuevo movimiento
-        $productos = Producto::orderBy('nombre')->get();
-        
-        return view('qr_scanner', compact('productos'));
-    }
-    
-    public function qrGeneratorForm()
-    {
-        // Obtener todos los productos para generar códigos QR
-        $productos = Producto::orderBy('nombre')->get();
-        
-        return view('qr_generator', compact('productos'));
-    }
-    
-    public function generarQr(Request $request)
-    {
-        $request->validate([
-            'productos' => 'required|array',
-            'productos.*' => 'exists:productos,id_producto',
-        ]);
-        
-        $productosIds = $request->productos;
-        $productos = Producto::whereIn('id_producto', $productosIds)->get();
-        
-        $qrCodes = [];
-        
-        foreach ($productos as $producto) {
-            // Generar código QR con el código del producto
-            // En un entorno real, usaríamos una librería como SimpleSoftwareIO/simple-qrcode
-            // Aquí simulamos la generación con una imagen base64
-            $qrCodes[] = [
-                'codigo' => $producto->codigo,
-                'nombre' => $producto->nombre,
-                'image' => '<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' . urlencode($producto->codigo) . '" alt="QR Code" class="img-fluid">'
-            ];
-        }
-        
-        return view('qr_generator', compact('productos', 'qrCodes'));
-    }
+    // Funciones de QR eliminadas
     
     public function conteoFisico(Request $request)
     {
